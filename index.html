@@ -894,7 +894,7 @@
 
     // Referral and Share Links
     function getShareText() {
-      const refLink = `https://taka-lime.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
+      const refLink = `https://taka-income-three.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
       return `আমি ফ্রিতে ৳৪০০ টাকা পেয়েছি । সবাই পাচ্ছে এবং বিকাশে উইথড্র দিচ্ছে । রেফার লিংক : ${refLink}`;
     }
 
@@ -904,13 +904,13 @@
     };
 
     window.shareTelegram = function() {
-      const refLink = encodeURIComponent(`https://taka-lime.vercel.app/?ref=${deviceId}`);
+      const refLink = encodeURIComponent(`https://taka-income-three.vercel.app/?ref=${deviceId}`);
       const text = encodeURIComponent('আমি ফ্রিতে ৳৪০০ টাকা পেয়েছি । সবাই পাচ্ছে এবং বিকাশে উইথড্র দিচ্ছে ।');
       window.open(`https://t.me/share/url?url=${refLink}&text=${text}`, '_blank');
     };
 
     window.shareMessenger = function() {
-      const refLink = `https://taka-lime.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
+      const refLink = `https://taka-income-three.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
       if (navigator.share) {
         navigator.share({
           title: 'Viral Taka বিকাশ রিওয়ার্ড',
@@ -988,7 +988,7 @@
 
     // Referral Modal
     window.openReferralModal = function() {
-      document.getElementById('refLinkInput').value = `https://taka-lime.vercel.app/?ref=${deviceId}`;
+      document.getElementById('refLinkInput').value = `https://taka-income-three.vercel.app/?ref=${deviceId}`;
       document.getElementById('referralModal').classList.add('active');
     };
     window.closeReferralModal = function() {
