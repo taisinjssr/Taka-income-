@@ -1,1 +1,13 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="100" fill="#E2136E"/>
+  <g transform="translate(60, 60) scale(0.76)">
+    <!-- bKash Official Origami Bird in Pure White and Shaded Creases -->
+    <path d="M332 58 L418 132 L320 120 Z" fill="#FFFFFF"/>
+    <path d="M192 196 L320 120 L270 348 Z" fill="#FFFFFF"/>
+    <path d="M320 120 L488 28 L348 226 Z" fill="#FFFFFF"/>
+    <path d="M348 226 L488 28 L412 268 Z" fill="#FCE7F3"/>
+    <path d="M270 348 L348 226 L412 268 L220 472 Z" fill="#FFFFFF"/>
+    <path d="M192 196 L270 348 L88 304 Z" fill="#FFFFFF"/>
+    <path d="M88 304 L220 472 L160 376 Z" fill="#FCE7F3"/>
+  </g>
+</svg>

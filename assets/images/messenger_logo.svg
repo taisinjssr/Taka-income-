@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="m_grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0099FF"/>
+      <stop offset="45%" stop-color="#A033FF"/>
+      <stop offset="100%" stop-color="#FF5280"/>
+    </linearGradient>
+  </defs>
+  <!-- Messenger Speech Balloon -->
+  <path d="M256 32C132.288 32 32 125.04 32 239.776C32 305.152 64.672 363.856 115.776 401.456V480L192.592 437.84C213.088 443.536 234.72 447.552 256 447.552C379.712 447.552 480 354.512 480 239.776C480 125.04 379.712 32 256 32Z" fill="url(#m_grad)"/>
+  <!-- Messenger Iconic Lightning Bolt Zigzag -->
+  <path d="M139.52 303.488L215.936 222.56L278.88 285.504L373.44 186.272L297.024 267.2L234.08 204.256L139.52 303.488Z" fill="#FFFFFF"/>
+</svg>
