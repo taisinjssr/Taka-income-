@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Taka - রিওয়ার্ড ও টাস্ক আর্নিং</title>
+  <meta name="description" content="দৈনিক ভিজিট টাস্ক সম্পন্ন করে এবং বন্ধুদের রেফার করে সরাসরি বিকাশে টাকা আয় করার সহজ প্ল্যাটফর্ম।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #E2136E;
+      --primary-hover: #C20E5D;
+      --primary-light: #FDF2F8;
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --warning: #F59E0B;
+      --warning-light: #FFFBEB;
+      --danger: #EF4444;
+      --danger-light: #FEF2F2;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 50px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .brand-text h1 {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-main);
+    }
+    .brand-text span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .balance-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--success-light);
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(226, 19, 110, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-success {
+      background: var(--success);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+    .btn-success:hover {
+      background: #059669;
+    }
+    .btn-outline {
+      background: white;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background: #F1F5F9;
+    }
+
+    /* User Panel (Only Balance Card) */
+    .user-panel {
+      margin: 20px 0 28px;
+    }
+    .balance-card {
+      background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #4A044E 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 24px 28px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 640px) {
+      .balance-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .balance-card::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 140px;
+      height: 140px;
+      background: rgba(226, 19, 110, 0.2);
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .balance-info .title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #F472B6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .balance-amount {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.1;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .balance-amount span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #FBCFE8;
+    }
+    .device-id-text {
+      font-size: 11px;
+      color: #94A3B8;
+      font-family: monospace;
+      margin-top: 6px;
+    }
+    .balance-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Section Styles */
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Notice Banners */
+    .banner {
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+    .banner-danger {
+      background: var(--danger-light);
+      border: 1px solid #FECACA;
+      color: #991B1B;
+    }
+    .banner-warning {
+      background: var(--warning-light);
+      border: 1px solid #FDE68A;
+      color: #92400E;
+    }
+    .banner-success {
+      background: var(--success-light);
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+    }
+
+    /* Task Cards Grid */
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 640px) {
+      .tasks-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .task-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .task-card:hover {
+      border-color: #FBCFE8;
+      box-shadow: 0 4px 12px rgba(226, 19, 110, 0.08);
+    }
+    .task-card.completed {
+      background: var(--success-light);
+      border-color: #A7F3D0;
+    }
+    .task-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .task-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+    }
+    .task-heading {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+    }
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #F1F5F9;
+      color: var(--text-main);
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .task-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .task-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #F1F5F9;
+      padding-top: 12px;
+    }
+    .reward-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Referral Card */
+    .referral-card {
+      background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .referral-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .referral-text h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .referral-text p {
+      font-size: 12px;
+      color: #C7D2FE;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #F1F5F9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    .modal-close:hover {
+      background: #E2E8F0;
+      color: var(--text-main);
+    }
+
+    /* Social Share Buttons */
+    .share-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .share-btn {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .share-btn:hover {
+      background: #F1F5F9;
+      transform: translateY(-2px);
+    }
+    .share-btn img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .share-btn span {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Progress bar */
+    .progress-track {
+      background: #E2E8F0;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, #F472B6, #E2136E);
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Timer Countdown Ring */
+    .timer-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 4px solid #FBCFE8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .timer-circle-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .timer-circle-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #0F172A;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <!-- Firebase Modular Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc, 
+      updateDoc, 
+      collection, 
+      addDoc, 
+      increment, 
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Provided Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBaJsv660q1aJmWDf-yIdTRE5HFFDvFRqs",
+      authDomain: "viral-taka.firebaseapp.com",
+      projectId: "viral-taka",
+      storageBucket: "viral-taka.firebasestorage.app",
+      messagingSenderId: "267830982100",
+      appId: "1:267830982100:web:760e1eaa56461d4e651241",
+      measurementId: "G-D6S15Q47YC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 4 Visit Tasks Links
+    const TASKS = [
+      { id: 1, title: 'ভিজিট টাস্ক ১', desc: 'বিজ্ঞাপন ও ওয়েবসাইট ভিজিট করে ৫০ টাকা রিওয়ার্ড নিন', reward: 50, url: 'https://recallscarce.com/s1v5eea6g?key=8f37d4dfe3f3f4641cc18dd674dcb08c', duration: 7 },
+      { id: 2, title: 'ভিজিট টাস্ক ২', desc: 'স্পনসর লিংক ভিজিট করে ৫০ টাকা সরাসরি জমা করুন', reward: 50, url: 'https://uplcm.com/4/11727189', duration: 10 },
+      { id: 3, title: 'ভিজিট টাস্ক ৩', desc: 'অফার পেজে গিয়ে সম্পূর্ণ টাইমার শেষ করে ৫০ টাকা গ্রহণ করুন', reward: 50, url: 'https://recallscarce.com/vxxjn370bw?key=dcbb5dbb7f1c5c749558e07e93960939', duration: 15 },
+      { id: 4, title: 'ভিজিট টাস্ক ৪', desc: 'ডেইলি বোনাস পার্টনার পেজ ভিজিট করে ৫০ টাকা অর্জন করুন', reward: 50, url: 'https://uplcm.com/4/11480046', duration: 20 }
+    ];
+
+    const BENGALI_DIGITS = { '0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯' };
+    function toBn(num) {
+      return String(num).replace(/[0-9]/g, d => BENGALI_DIGITS[d] || d);
+    }
+
+    function getToday() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+
+    // State Variables
+    let deviceId = '';
+    let userData = {
+      deviceId: '',
+      balance: 50, // ৫০ টাকা ইনস্ট্যান্ট বোনাস
+      totalEarned: 50,
+      referralsCount: 0,
+      referredBy: null,
+      failedAttemptsToday: 0,
+      failedAttemptsDate: getToday(),
+      completedTasksToday: [],
+      tasksDate: getToday(),
+      timers: { 1: 7, 2: 10, 3: 15, 4: 20 }
+    };
+
+    let activeTaskId = null;
+    let countdownRemaining = 0;
+    let totalCountdown = 0;
+    let countdownInterval = null;
+    let isCountdownFinished = false;
+
+    // Toast helper
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // Initialize Device ID & User Account
+    async function initApp() {
+      deviceId = localStorage.getItem('vt_device_id');
+      let isNew = false;
+      if (!deviceId) {
+        const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+        const timePart = Date.now().toString(36).slice(-4).toUpperCase();
+        deviceId = `VT-${rand}-${timePart}`;
+        localStorage.setItem('vt_device_id', deviceId);
+        isNew = true;
+      }
+      userData.deviceId = deviceId;
+
+      // Check referral query param
+      const urlParams = new URLSearchParams(window.location.search);
+      const refParam = urlParams.get('ref') || urlParams.get('referrer');
+
+      // Randomize timers among [7, 10, 15, 20]
+      const durations = [7, 10, 15, 20].sort(() => Math.random() - 0.5);
+      const randomizedTimers = {
+        1: durations[0],
+        2: durations[1],
+        3: durations[2],
+        4: durations[3]
+      };
+
+      try {
+        const userDocRef = doc(db, 'users', deviceId);
+        const userSnap = await getDoc(userDocRef);
+
+        if (userSnap.exists()) {
+          userData = userSnap.data();
+          // Sanitize daily state
+          const today = getToday();
+          if (userData.failedAttemptsDate !== today) {
+            userData.failedAttemptsToday = 0;
+            userData.failedAttemptsDate = today;
+          }
+          if (userData.tasksDate !== today) {
+            userData.completedTasksToday = [];
+            userData.tasksDate = today;
+            userData.timers = randomizedTimers;
+          }
+          if (!userData.timers) {
+            userData.timers = randomizedTimers;
+          }
+          await setDoc(userDocRef, userData, { merge: true });
+        } else {
+          // New Account: 50 Taka signup bonus
+          userData = {
+            deviceId,
+            balance: 50,
+            totalEarned: 50,
+            referralsCount: 0,
+            referredBy: (refParam && refParam !== deviceId) ? refParam : null,
+            failedAttemptsToday: 0,
+            failedAttemptsDate: getToday(),
+            completedTasksToday: [],
+            tasksDate: getToday(),
+            timers: randomizedTimers,
+            createdAt: new Date().toISOString()
+          };
+
+          // Credit referrer if referred
+          if (userData.referredBy) {
+            try {
+              const refDocRef = doc(db, 'users', userData.referredBy);
+              await updateDoc(refDocRef, {
+                referralsCount: increment(1),
+                balance: increment(20),
+                totalEarned: increment(20)
+              });
+              await addDoc(collection(db, 'referrals'), {
+                referrerId: userData.referredBy,
+                newDeviceId: deviceId,
+                reward: 20,
+                date: getToday(),
+                createdAt: new Date().toISOString()
+              });
+            } catch (err) {
+              console.warn('Referral credit error:', err);
+            }
+          }
+
+          await setDoc(userDocRef, userData);
+          showToast('স্বাগতম! একাউন্ট খোলার সাথে সাথে ৫০ টাকা বোনাস পেয়ে গেছেন!');
+        }
+      } catch (err) {
+        console.warn('Firestore offline fallback:', err);
+        const localCached = localStorage.getItem('vt_user_' + deviceId);
+        if (localCached) {
+          try { userData = JSON.parse(localCached); } catch {}
+        }
+      }
+
+      localStorage.setItem('vt_user_' + deviceId, JSON.stringify(userData));
+      renderUI();
+    }
+
+    async function syncUserData() {
+      localStorage.setItem('vt_user_' + deviceId, JSON.stringify(userData));
+      try {
+        const userDocRef = doc(db, 'users', deviceId);
+        await setDoc(userDocRef, userData, { merge: true });
+      } catch (err) {
+        console.warn('Sync warning:', err);
+      }
+      renderUI();
+    }
+
+    function renderUI() {
+      // Balance updates
+      document.getElementById('headerBalance').textContent = '৳' + toBn(userData.balance);
+      document.getElementById('cardBalance').textContent = '৳' + toBn(userData.balance);
+      document.getElementById('deviceIdDisplay').textContent = 'ডিভাইস আইডি: ' + userData.deviceId;
+      document.getElementById('refCountText').textContent = toBn(userData.referralsCount || 0) + ' / ১২';
+
+      // Failure count
+      const failures = userData.failedAttemptsToday || 0;
+      document.getElementById('failureCountDisplay').textContent = toBn(failures) + ' / ২৫';
+
+      // 25 failure limit notice
+      const isLocked = failures >= 25;
+      const lockBanner = document.getElementById('lockBanner');
+      if (isLocked) {
+        lockBanner.style.display = 'flex';
+      } else {
+        lockBanner.style.display = 'none';
+      }
+
+      // Render tasks grid
+      const tasksContainer = document.getElementById('tasksContainer');
+      tasksContainer.innerHTML = '';
+
+      TASKS.forEach(task => {
+        const isDone = (userData.completedTasksToday || []).includes(task.id);
+        const duration = (userData.timers && userData.timers[task.id]) || task.duration;
+
+        const card = document.createElement('div');
+        card.className = `task-card ${isDone ? 'completed' : ''}`;
+        card.innerHTML = `
+          <div>
+            <div class="task-card-header">
+              <div class="task-heading">
+                <span class="task-num">${toBn(task.id)}</span>
+                <span>${task.title}</span>
+              </div>
+              <div class="timer-badge">
+                ⏱ ${toBn(duration)} সেকেন্ড
+              </div>
+            </div>
+            <p class="task-desc">${task.desc}</p>
+          </div>
+          <div class="task-footer">
+            <span class="reward-val">+৳${toBn(task.reward)}</span>
+            ${isDone ? `
+              <span style="color: #065F46; font-size: 12px; font-weight: 700;">✓ সম্পন্ন হয়েছে</span>
+            ` : `
+              <button 
+                class="btn btn-primary" 
+                style="padding: 6px 14px; font-size: 12px;"
+                ${isLocked ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}
+                onclick="window.startVisitTask(${task.id})">
+                ভিজিট টাস্ক
+              </button>
+            `}
+          </div>
+        `;
+        tasksContainer.appendChild(card);
+      });
+    }
+
+    // Start Visit Task
+    window.startVisitTask = function(taskId) {
+      if ((userData.failedAttemptsToday || 0) >= 25) {
+        alert('আপনি আজ ২৫ বার ভুল করেছেন! আজকের জন্য কাজ বন্ধ রাখা হয়েছে। আগামীকাল আবার করতে পারবেন।');
+        return;
+      }
+      if ((userData.completedTasksToday || []).includes(taskId)) return;
+
+      const task = TASKS.find(t => t.id === taskId);
+      if (!task) return;
+
+      const duration = (userData.timers && userData.timers[taskId]) || task.duration;
+      activeTaskId = taskId;
+      totalCountdown = duration;
+      countdownRemaining = duration;
+      isCountdownFinished = false;
+
+      // Hide previous error banner
+      document.getElementById('taskErrorBanner').style.display = 'none';
+
+      // Open sponsor link
+      window.open(task.url, '_blank');
+
+      // Show countdown modal
+      document.getElementById('countdownNum').textContent = toBn(countdownRemaining);
+      document.getElementById('countdownModal').classList.add('active');
+
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        countdownRemaining--;
+        if (countdownRemaining <= 0) {
+          clearInterval(countdownInterval);
+          isCountdownFinished = true;
+          document.getElementById('countdownNum').textContent = '০';
+          document.getElementById('claimRewardBtn').style.display = 'inline-flex';
+          document.getElementById('cancelTaskBtn').style.display = 'none';
+        } else {
+          document.getElementById('countdownNum').textContent = toBn(countdownRemaining);
+        }
+      }, 1000);
+    };
+
+    // Cancel or early exit
+    window.cancelActiveTask = function() {
+      clearInterval(countdownInterval);
+      document.getElementById('countdownModal').classList.remove('active');
+
+      if (!isCountdownFinished) {
+        // Register failure
+        userData.failedAttemptsToday = (userData.failedAttemptsToday || 0) + 1;
+        syncUserData();
+
+        const errBanner = document.getElementById('taskErrorBanner');
+        errBanner.style.display = 'flex';
+        document.getElementById('taskErrorMsg').textContent = 'টাইমার শেষ হওয়ার আগেই ফিরে এসেছেন! কাজ সম্পন্ন হয়নি, আবার ট্রাই করুন।';
+      }
+    };
+
+    // Claim 50 Taka Reward
+    window.claimTaskReward = async function() {
+      if (!isCountdownFinished || !activeTaskId) return;
+
+      userData.balance += 50;
+      userData.totalEarned += 50;
+      userData.completedTasksToday = userData.completedTasksToday || [];
+      userData.completedTasksToday.push(activeTaskId);
+
+      document.getElementById('countdownModal').classList.remove('active');
+      document.getElementById('claimRewardBtn').style.display = 'none';
+      document.getElementById('cancelTaskBtn').style.display = 'inline-flex';
+
+      showToast('অভিনন্দন! ৫০ টাকা রিওয়ার্ড সফলভাবে জমা হয়েছে!');
+      await syncUserData();
+    };
+
+    // Referral and Share Links
+    function getShareText() {
+      const refLink = `https://taka-lime.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
+      return `আমি ফ্রিতে ৳৪০০ টাকা পেয়েছি । সবাই পাচ্ছে এবং বিকাশে উইথড্র দিচ্ছে । রেফার লিংক : ${refLink}`;
+    }
+
+    window.shareWhatsApp = function() {
+      const text = encodeURIComponent(getShareText());
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    };
+
+    window.shareTelegram = function() {
+      const refLink = encodeURIComponent(`https://taka-lime.vercel.app/?ref=${deviceId}`);
+      const text = encodeURIComponent('আমি ফ্রিতে ৳৪০০ টাকা পেয়েছি । সবাই পাচ্ছে এবং বিকাশে উইথড্র দিচ্ছে ।');
+      window.open(`https://t.me/share/url?url=${refLink}&text=${text}`, '_blank');
+    };
+
+    window.shareMessenger = function() {
+      const refLink = `https://taka-lime.vercel.app/?ref=${encodeURIComponent(deviceId)}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Viral Taka বিকাশ রিওয়ার্ড',
+          text: getShareText(),
+          url: refLink
+        }).catch(() => {
+          window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(refLink)}&app_id=291494419107518&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank');
+        });
+      } else {
+        window.open(`https://www.facebook.com/dialog/send?link=${encodeURIComponent(refLink)}&app_id=291494419107518&redirect_uri=${encodeURIComponent(window.location.href)}`, '_blank');
+      }
+    };
+
+    window.copyReferralLink = function() {
+      navigator.clipboard.writeText(getShareText());
+      showToast('রেফারেল মেসেজ ও লিংক কপি হয়েছে!');
+    };
+
+    // Withdraw Modal
+    window.openWithdrawModal = function() {
+      const modal = document.getElementById('withdrawModal');
+      const refs = userData.referralsCount || 0;
+      const isUnlocked = refs >= 12;
+
+      document.getElementById('withRefCount').textContent = toBn(refs);
+      document.getElementById('withProgressFill').style.width = Math.min(100, Math.round((refs / 12) * 100)) + '%';
+
+      if (isUnlocked) {
+        document.getElementById('withdrawFormContainer').style.display = 'block';
+        document.getElementById('withdrawLockedMsg').style.display = 'none';
+      } else {
+        document.getElementById('withdrawFormContainer').style.display = 'none';
+        document.getElementById('withdrawLockedMsg').style.display = 'block';
+      }
+
+      modal.classList.add('active');
+    };
+
+    window.closeWithdrawModal = function() {
+      document.getElementById('withdrawModal').classList.remove('active');
+    };
+
+    window.submitWithdrawal = async function(e) {
+      e.preventDefault();
+      const num = document.getElementById('bkashInput').value.trim();
+      const amount = Number(document.getElementById('amountInput').value);
+
+      if (!num.startsWith('01') || num.length !== 11) {
+        alert('সঠিক ১১ ডিজিটের বিকাশ নম্বর দিন (যেমন: 017XXXXXXXX)');
+        return;
+      }
+      if (isNaN(amount) || amount < 50 || amount > userData.balance) {
+        alert(`সর্বনিম্ন ৫০ টাকা এবং সর্বোচ্চ ৳${toBn(userData.balance)} তুলতে পারবেন।`);
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, 'withdrawals'), {
+          deviceId,
+          bkashNumber: num,
+          amount,
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+          timestamp: serverTimestamp()
+        });
+      } catch (err) {
+        console.warn('Withdrawal saved locally:', err);
+      }
+
+      userData.balance -= amount;
+      await syncUserData();
+      closeWithdrawModal();
+      alert(`আপনার ৳${toBn(amount)} ক্যাশআউট রিকোয়েস্ট জমা হয়েছে! শীঘ্রই বিকাশে পেয়ে যাবেন।`);
+    };
+
+    // Referral Modal
+    window.openReferralModal = function() {
+      document.getElementById('refLinkInput').value = `https://taka-lime.vercel.app/?ref=${deviceId}`;
+      document.getElementById('referralModal').classList.add('active');
+    };
+    window.closeReferralModal = function() {
+      document.getElementById('referralModal').classList.remove('active');
+    };
+
+    // Auto-boot on load
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="assets/images/bkash_logo.svg" alt="bKash" class="brand-logo">
+        <div class="brand-text">
+          <h1>Viral Taka</h1>
+          <span>বিকাশ রিওয়ার্ড প্ল্যাটফর্ম</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="balance-badge" id="headerBalance">৳৫০</div>
+        <button class="btn btn-primary" onclick="openWithdrawModal()">উইথড্র</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- User Panel: ONLY Balance Card -->
+    <section class="user-panel">
+      <div class="balance-card">
+        <div class="balance-info">
+          <div class="title">
+            <span>● বর্তমান ব্যালেন্স</span>
+          </div>
+          <div class="balance-amount">
+            <span id="cardBalance">৳৫০</span>
+            <span>টাকা</span>
+          </div>
+          <p class="device-id-text" id="deviceIdDisplay">ডিভাইস আইডি: VT-...</p>
+        </div>
+
+        <div class="balance-actions">
+          <button class="btn btn-primary" onclick="openWithdrawModal()">
+            <img src="assets/images/bkash_logo.svg" style="width: 18px; height: 18px; border-radius: 4px;" alt="">
+            <span>বিকাশ উইথড্র</span>
+          </button>
+          <button class="btn btn-outline" onclick="openReferralModal()">
+            <span>রেফার করুন</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error & Limit Notifications -->
+    <div id="taskErrorBanner" class="banner banner-warning" style="display: none;">
+      <span id="taskErrorMsg">টাইমার শেষ হওয়ার আগেই ফিরে এসেছেন! কাজ সম্পন্ন হয়নি, আবার ট্রাই করুন।</span>
+      <button style="background: none; border: none; cursor: pointer; font-weight: bold;" onclick="this.parentElement.style.display='none'">✕</button>
+    </div>
+
+    <div id="lockBanner" class="banner banner-danger" style="display: none;">
+      <span>⚠️ আপনি আজ ২৫ বার ভুল করেছেন! আজকের জন্য কাজ বন্ধ রাখা হয়েছে। আগামীকাল আবার করতে পারবেন।</span>
+    </div>
+
+    <!-- 1. Visit Tasks Section -->
+    <section style="margin-bottom: 28px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
+        <div>
+          <h2 class="section-title">১. দৈনিক ভিজিট টাস্ক</h2>
+          <p class="section-sub">প্রতিটি লিংকে নির্ধারিত সেকেন্ড অপেক্ষা করে ৫০ টাকা আয় করুন</p>
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted); background: #F1F5F9; padding: 4px 10px; border-radius: 8px;">
+          আজকের ভুল: <strong id="failureCountDisplay" style="color: var(--primary);">০ / ২৫</strong>
+        </div>
+      </div>
+
+      <div class="tasks-grid" id="tasksContainer">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- 2. Referral Program Section -->
+    <section>
+      <div class="referral-card">
+        <div class="referral-text">
+          <h3>৩. বন্ধুদের রেফার করে আয় করুন</h3>
+          <p>প্রতিটি সফল রেফারে পাবেন ২০ টাকা। ১২টি রেফার করলেই বিকাশ উইথড্র চালু হবে!</p>
+          <div style="font-size: 12px; color: #FBCFE8; margin-top: 6px;">
+            আপনার সফল রেফার: <strong id="refCountText">০ / ১২</strong>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="background: #E2136E;" onclick="openReferralModal()">
+          <span>রেফার লিংক নিন</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Countdown Modal -->
+  <div class="modal-overlay" id="countdownModal">
+    <div class="modal" style="text-align: center;">
+      <div class="timer-circle">
+        <div class="timer-circle-num" id="countdownNum">১৫</div>
+        <div class="timer-circle-label">সেকেন্ড</div>
+      </div>
+      <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">ভিজিট টাস্ক চলছে...</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">
+        স্পনসর পেজটি নতুন ট্যাবে ওপেন হয়েছে। নির্ধারিত টাইমার শেষ হওয়া পর্যন্ত অপেক্ষা করুন। আগে বের হলে কাজটি ব্যর্থ হবে!
+      </p>
+
+      <button id="claimRewardBtn" class="btn btn-success" style="display: none; width: 100%; padding: 12px;" onclick="claimTaskReward()">
+        <span>৫০ টাকা সংগ্রহ করুন</span>
+      </button>
+
+      <button id="cancelTaskBtn" class="btn btn-outline" style="width: 100%; padding: 10px;" onclick="cancelActiveTask()">
+        <span>বাতিল করুন (ভুল গণনা হবে)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Withdraw Modal -->
+  <div class="modal-overlay" id="withdrawModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeWithdrawModal()">✕</button>
+
+      <div style="text-align: center; margin-bottom: 16px;">
+        <img src="assets/images/bkash_logo.svg" alt="bKash" style="width: 56px; height: 56px; border-radius: 14px; margin-bottom: 8px;">
+        <h3 style="font-size: 20px; font-weight: 800; color: var(--text-main);">বিকাশ উইথড্রয়াল</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.4;">
+          বিকাশে উইথড্র করার জন্য আপনাকে <strong style="color: var(--primary);">১২ জনকে রেফার</strong> করতে হবে । রেফার করা অনেক সহজ নিচের বাটন গুলো ক্লিক করে রেফার করুন ।
+        </p>
+      </div>
+
+      <!-- Referral Count Status -->
+      <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 14px; padding: 12px; margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--text-muted);">
+          <span>আপনার সফল রেফার:</span>
+          <span style="color: var(--primary);"><strong id="withRefCount">০</strong> / ১২</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="withProgressFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- 3 Social Share Buttons -->
+      <div class="share-buttons-grid">
+        <div class="share-btn" onclick="shareWhatsApp()">
+          <img src="assets/images/whatsapp_logo.svg" alt="WhatsApp">
+          <span>WhatsApp</span>
+        </div>
+        <div class="share-btn" onclick="shareTelegram()">
+          <img src="assets/images/telegram_logo.svg" alt="Telegram">
+          <span>Telegram</span>
+        </div>
+        <div class="share-btn" onclick="shareMessenger()">
+          <img src="assets/images/messenger_logo.svg" alt="Messenger">
+          <span>Messenger</span>
+        </div>
+      </div>
+
+      <!-- Unlocked Form or Locked Notice -->
+      <div id="withdrawLockedMsg" style="text-align: center; padding: 12px; background: #FFFBEB; border-radius: 12px; color: #92400E; font-size: 12px; font-weight: 600;">
+        🔒 ১২টি রেফার সম্পন্ন হলে সাথে সাথে বিকাশ ক্যাশআউট বাটন সক্রিয় হবে।
+      </div>
+
+      <div id="withdrawFormContainer" style="display: none; border-top: 1px solid var(--border-color); padding-top: 14px;">
+        <form onsubmit="submitWithdrawal(event)">
+          <div class="form-group">
+            <label class="form-label">আপনার ব্যক্তিগত বিকাশ নম্বর:</label>
+            <input type="tel" id="bkashInput" class="form-input" placeholder="017XXXXXXXX" maxlength="11" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">উইথড্র পরিমাণ (টাকা):</label>
+            <input type="number" id="amountInput" class="form-input" value="400" min="50" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+            <span>বিকাশে ক্যাশআউট সাবমিট করুন</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referral Modal -->
+  <div class="modal-overlay" id="referralModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeReferralModal()">✕</button>
+
+      <div style="text-align: center; margin-bottom: 16px;">
+        <h3 style="font-size: 20px; font-weight: 800;">বন্ধুদের রেফার করুন</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+          প্রতি রেফারে সরাসরি <strong style="color: var(--success);">২০ টাকা</strong> আয় করুন!
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">আপনার রেফারেল লিংক:</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="refLinkInput" class="form-input" readonly style="background: #F8FAFC;">
+          <button class="btn btn-outline" style="white-space: nowrap;" onclick="copyReferralLink()">কপি করুন</button>
+        </div>
+      </div>
+
+      <div class="share-buttons-grid">
+        <div class="share-btn" onclick="shareWhatsApp()">
+          <img src="assets/images/whatsapp_logo.svg" alt="WhatsApp">
+          <span>WhatsApp</span>
+        </div>
+        <div class="share-btn" onclick="shareTelegram()">
+          <img src="assets/images/telegram_logo.svg" alt="Telegram">
+          <span>Telegram</span>
+        </div>
+        <div class="share-btn" onclick="shareMessenger()">
+          <img src="assets/images/messenger_logo.svg" alt="Messenger">
+          <span>Messenger</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
